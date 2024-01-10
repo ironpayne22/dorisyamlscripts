@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pipelineinitialisation
+  namespace: admin
+  labels:
+    app: pipelineinitialisation
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pipelineinitialisation
+  template:
+    metadata:
+      labels:
+        app: pipelineinitialisation
+    spec:
+      serviceAccountName: admin-sa
+      containers:
+      - name: pipelineinitialisation
+        image: image_url_var
+        imagePullPolicy: Always
+        securityContext:
+          privileged: true
+        volumeMounts:
+        - mountPath: /yamlfiles
+          name: yaml-files
+        envFrom:
+        - secretRef:
+            name: variables-for-pipelineinitialisation
+      # imagePullSecrets:
+      #  - name: dockerconfigjson-github-com
+      volumes:
+      - name: yaml-files
+        persistentVolumeClaim:
+          claimName: yamlstore
+
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: pipelineinitialisation
+#   namespace: admin
+#   labels:
+#     app: pipelineinitialisation
+# spec:
+#   restartPolicy: Never
+#   serviceAccountName: admin-sa
+#   containers:
+#   - name: pipelineinitialisation
+#     image: image_url_var
+#     imagePullPolicy: Always
+#     securityContext:
+#       privileged: true
+#     volumeMounts:
+#     - mountPath: /yamlfiles
+#       name: yaml-files
+#     envFrom:
+#     - secretRef:
+#         name: variables-for-pipelineinitialisation
+#   imagePullSecrets:
+#     - name: dockerconfigjson-github-com
+#   volumes:
+#   - name: yaml-files
+#     persistentVolumeClaim:
+#       claimName: yamlstore

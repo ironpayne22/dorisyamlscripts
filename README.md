@@ -108,8 +108,8 @@ The "deploy.sh" file will look like this:
 ```bash
 #!/bin/bash
 
-export image_url_var="ghcr.io/ironpayne22/dorispipelineinitialisation:main@sha256:db9edb47b8f7681613f434e45efec8cb74238c6b9cff56f560b80e845475fa61" #latest version of pipeline initialisation image url
-export pull_ghcr_image_token="abcd"  #same token as above. Only needed if using private version of pipeline initialisation. If using my public copy, this line MUST be deleted
+# export image_url_var="ghcr.io/ironpayne22/dorispipelineinitialisation:main@sha256:db9edb47b8f7681613f434e45efec8cb74238c6b9cff56f560b80e845475fa61" #latest version of pipeline initialisation image url   only if private
+# export pull_ghcr_image_token="abcd"  #same token as above. Only needed if using private version of pipeline initialisation. If using my public copy, this line MUST be deleted    only if private
 
 kubectl apply -f "AdminNamespace.yml"
 kubectl apply -f "Secrets.yml"

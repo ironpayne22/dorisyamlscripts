@@ -18,7 +18,8 @@ spec:
       serviceAccountName: admin-sa
       containers:
       - name: pipelineinitialisation
-        image: image_url_var
+        # image: image_url_var    can only use this if private
+        image: ghcr.io/ironpayne22/dorispipelineinitialisation:main@sha256:db9edb47b8f7681613f434e45efec8cb74238c6b9cff56f560b80e845475fa61
         imagePullPolicy: Always
         securityContext:
           privileged: true
